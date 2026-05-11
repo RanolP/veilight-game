@@ -27,7 +27,7 @@ importers:
         specifier: ^7.1.12
         version: 7.3.3
 
-  apps/game:
+  apps/veilight-game:
     dependencies:
       '@internal/renderer':
         specifier: workspace:*
