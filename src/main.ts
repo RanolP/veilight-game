@@ -1,4 +1,11 @@
+import { loadAssets } from "./assets";
 import { createGameLoop } from "./game-loop";
+import { RenderCommandCollector } from "./render-command-collector";
+import { atlases, defaultMaterial, demo } from "./rendering-resources";
+import { createRenderer } from "./renderer";
+
+const VIRTUAL_WIDTH = 360;
+const VIRTUAL_HEIGHT = 640;
 
 function getCanvas(): HTMLCanvasElement {
   const element = document.querySelector<HTMLCanvasElement>("#game");
@@ -10,54 +17,26 @@ function getCanvas(): HTMLCanvasElement {
   return element;
 }
 
-const canvas = getCanvas();
-
-const canvasContext = canvas.getContext("2d");
-
-if (!canvasContext) {
-  throw new Error("Canvas 2D context is unavailable");
-}
-
-const context = canvasContext;
-const devicePixelRatio = window.devicePixelRatio || 1;
-
 type Actor = {
   x: number;
   previousX: number;
   y: number;
-  radius: number;
   speed: number;
 };
 
 const actor: Actor = {
-  x: 120,
-  previousX: 120,
-  y: 0,
-  radius: 24,
-  speed: 180,
+  x: 32,
+  previousX: 32,
+  y: 304,
+  speed: 72,
 };
 
-function resizeCanvas() {
-  const width = Math.floor(window.innerWidth * devicePixelRatio);
-  const height = Math.floor(window.innerHeight * devicePixelRatio);
-
-  if (canvas.width === width && canvas.height === height) {
-    return;
-  }
-
-  canvas.width = width;
-  canvas.height = height;
-  actor.y = canvas.height / 2;
-  actor.x = Math.max(actor.radius, Math.min(actor.x, canvas.width - actor.radius));
+function update(deltaSeconds: number): void {
   actor.previousX = actor.x;
-}
+  actor.x += actor.speed * deltaSeconds;
 
-function update(deltaSeconds: number) {
-  actor.previousX = actor.x;
-  actor.x += actor.speed * devicePixelRatio * deltaSeconds;
-
-  const rightBound = canvas.width - actor.radius;
-  const leftBound = actor.radius;
+  const rightBound = VIRTUAL_WIDTH - demo.pet.w;
+  const leftBound = 0;
 
   if (actor.x >= rightBound || actor.x <= leftBound) {
     actor.x = Math.max(leftBound, Math.min(actor.x, rightBound));
@@ -65,36 +44,36 @@ function update(deltaSeconds: number) {
   }
 }
 
-function render(alpha: number) {
-  resizeCanvas();
+async function bootstrap(): Promise<void> {
+  const canvas = getCanvas();
+  const assets = await loadAssets({ atlases });
+  const renderer = createRenderer(canvas, { assets });
+  const collector = new RenderCommandCollector();
 
-  const interpolatedX = actor.previousX + (actor.x - actor.previousX) * alpha;
+  createGameLoop({
+    update,
+    render(alpha) {
+      collector.reset();
 
-  context.clearRect(0, 0, canvas.width, canvas.height);
+      const interpolatedX = actor.previousX + (actor.x - actor.previousX) * alpha;
 
-  const gradient = context.createLinearGradient(0, 0, canvas.width, canvas.height);
-  gradient.addColorStop(0, "#1b211c");
-  gradient.addColorStop(1, "#0c0d0c");
-  context.fillStyle = gradient;
-  context.fillRect(0, 0, canvas.width, canvas.height);
+      collector.drawSprite({
+        sprite: demo.pet,
+        material: defaultMaterial,
+        x: interpolatedX | 0,
+        y: actor.y,
+      });
+      collector.drawSprite({
+        sprite: demo.pet,
+        material: defaultMaterial,
+        x: VIRTUAL_WIDTH / 2 - demo.pet.w,
+        y: VIRTUAL_HEIGHT / 2 - demo.pet.h,
+        scale: 2,
+      });
 
-  context.strokeStyle = "rgb(246 241 222 / 0.12)";
-  context.lineWidth = 2 * devicePixelRatio;
-  context.strokeRect(
-    32 * devicePixelRatio,
-    32 * devicePixelRatio,
-    canvas.width - 64 * devicePixelRatio,
-    canvas.height - 64 * devicePixelRatio,
-  );
-
-  context.beginPath();
-  context.arc(interpolatedX, actor.y, actor.radius * devicePixelRatio, 0, Math.PI * 2);
-  context.fillStyle = "#f3c969";
-  context.shadowColor = "rgb(243 201 105 / 0.45)";
-  context.shadowBlur = 24 * devicePixelRatio;
-  context.fill();
-  context.shadowBlur = 0;
+      renderer.render(collector.commands);
+    },
+  }).start();
 }
 
-resizeCanvas();
-createGameLoop({ update, render }).start();
+void bootstrap();
