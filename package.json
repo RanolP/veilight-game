@@ -1,23 +1,25 @@
 {
-  "name": "veilight-game",
+  "name": "veilight-game-monorepo",
   "version": "0.0.0",
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "vite",
-    "build": "tsc && vite build",
-    "preview": "vite preview",
+    "dev": "turbo run dev --filter @veilight/game",
+    "build": "turbo run build",
+    "preview": "pnpm --filter @veilight/game run preview",
     "format": "oxfmt --write .",
     "format:check": "oxfmt --check .",
-    "lint": "oxlint .",
-    "check": "pnpm run format:check && pnpm run lint && pnpm run build",
+    "lint": "turbo run lint",
+    "check": "pnpm run format:check && turbo run check",
     "prepare": "sh -c 'if git rev-parse --git-dir >/dev/null 2>&1; then lefthook install; fi'"
   },
   "devDependencies": {
     "lefthook": "^2.1.6",
     "oxfmt": "^0.48.0",
     "oxlint": "^1.63.0",
+    "turbo": "^2.6.1",
     "typescript": "~5.9.3",
     "vite": "^7.1.12"
-  }
+  },
+  "packageManager": "pnpm@10.29.3"
 }

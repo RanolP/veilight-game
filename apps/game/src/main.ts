@@ -1,8 +1,6 @@
-import { loadAssets } from "./assets";
+import { createRenderer, loadAssets, RenderCommandCollector } from "@veilight/renderer";
 import { createGameLoop } from "./game-loop";
-import { RenderCommandCollector } from "./render-command-collector";
 import { atlases, defaultMaterial, demo } from "./rendering-resources";
-import { createRenderer } from "./renderer";
 
 const VIRTUAL_WIDTH = 360;
 const VIRTUAL_HEIGHT = 640;

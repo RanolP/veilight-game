@@ -1,0 +1,16 @@
+{
+  "name": "@veilight/game",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite --host 0.0.0.0",
+    "build": "tsc -p tsconfig.json && vite build",
+    "preview": "vite preview",
+    "check": "pnpm run lint && pnpm run build",
+    "lint": "oxlint ."
+  },
+  "dependencies": {
+    "@veilight/renderer": "workspace:*"
+  }
+}
