@@ -1,12 +1,12 @@
 {
-  "name": "veilight-game-monorepo",
+  "name": "fangame-engine-workspace",
   "version": "0.0.0",
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "turbo run dev --filter @veilight/game",
+    "dev": "turbo run dev --filter @internal/game",
     "build": "turbo run build",
-    "preview": "pnpm --filter @veilight/game run preview",
+    "preview": "pnpm --filter @internal/game run preview",
     "format": "oxfmt --write .",
     "format:check": "oxfmt --check .",
     "lint": "turbo run lint",

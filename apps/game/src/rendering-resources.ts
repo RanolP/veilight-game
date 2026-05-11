@@ -1,6 +1,6 @@
 import spriteFragmentSource from "./shaders/sprite.frag?raw";
 import spriteVertexSource from "./shaders/sprite.vert?raw";
-import { createMaterial, type Shader, type Sprite } from "@veilight/renderer";
+import { createMaterial, type Shader, type Sprite } from "@internal/renderer";
 
 export const spriteShader: Shader = Object.freeze({
   id: 1,

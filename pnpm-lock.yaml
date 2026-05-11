@@ -29,7 +29,7 @@ importers:
 
   apps/game:
     dependencies:
-      '@veilight/renderer':
+      '@internal/renderer':
         specifier: workspace:*
         version: link:../../packages/renderer
 
@@ -575,36 +575,6 @@ packages:
     cpu: [x64]
     os: [win32]
 
-  '@turbo/darwin-64@2.9.12':
-    resolution: {integrity: sha512-eu3eFRmE9NjgZ0wPdRJ44l+LGSeIky+tz5ZQd8zQkw/Yqi+BM7wq+8nbabeoiVUcICi/IZweMOKl/MCmkrd1+g==}
-    cpu: [x64]
-    os: [darwin]
-
-  '@turbo/darwin-arm64@2.9.12':
-    resolution: {integrity: sha512-RUkAE404z/J8NsyrUosMcBaXT6M4bRFxTQrmkDQBLQVXaC8Jl0e9bMvYDSX0GW7Ffm2m3j9y7RXgR1foeUAM9w==}
-    cpu: [arm64]
-    os: [darwin]
-
-  '@turbo/linux-64@2.9.12':
-    resolution: {integrity: sha512-InIUtH7cw/vqXNX1Gr7QgWfmw3ct08pV5CpfdEOR48z2u2rzdmpIuk00B/Q2xCb0PMWtKgiMQynfuphmEuUyTQ==}
-    cpu: [x64]
-    os: [linux]
-
-  '@turbo/linux-arm64@2.9.12':
-    resolution: {integrity: sha512-lC6nD//Xh67fmJM0LKaLsg74Wry0aYrgMklpiNgCbUaMdPIOqj0A00iri3NU7Lb7pZHx8ViisgpeDKlpSgFUCA==}
-    cpu: [arm64]
-    os: [linux]
-
-  '@turbo/windows-64@2.9.12':
-    resolution: {integrity: sha512-conYri8VUl72JOdYnLDPYwzqbPcY5ECoHmo9FWoKznemhaAIilj4maHqs9Uar0aKfNoZIULniy+6iWaLtLO34A==}
-    cpu: [x64]
-    os: [win32]
-
-  '@turbo/windows-arm64@2.9.12':
-    resolution: {integrity: sha512-XoR4bsg62/L/esRVcmoMESEiNZ36+YmyjYGLpoqk8nwMgXzzVjNOgX0lRSz5w/U/ajLGv3nhMsS0Q2QOdvp2AQ==}
-    cpu: [arm64]
-    os: [win32]
-
   '@types/estree@1.0.8':
     resolution: {integrity: sha512-dWHzHa2WqEXI/O1E9OjrocMTKJl2mSrEolh1Iomrv6U+JuNwaHXsXx9bLu5gG7BUWFIN0skIQJQ/L1rIex4X6w==}
 
@@ -1047,24 +1017,6 @@ snapshots:
   '@rollup/rollup-win32-x64-msvc@4.60.3':
     optional: true
 
-  '@turbo/darwin-64@2.9.12':
-    optional: true
-
-  '@turbo/darwin-arm64@2.9.12':
-    optional: true
-
-  '@turbo/linux-64@2.9.12':
-    optional: true
-
-  '@turbo/linux-arm64@2.9.12':
-    optional: true
-
-  '@turbo/windows-64@2.9.12':
-    optional: true
-
-  '@turbo/windows-arm64@2.9.12':
-    optional: true
-
   '@types/estree@1.0.8': {}
 
   esbuild@0.27.7:
@@ -1244,14 +1196,7 @@ snapshots:
 
   tinypool@2.1.0: {}
 
-  turbo@2.9.12:
-    optionalDependencies:
-      '@turbo/darwin-64': 2.9.12
-      '@turbo/darwin-arm64': 2.9.12
-      '@turbo/linux-64': 2.9.12
-      '@turbo/linux-arm64': 2.9.12
-      '@turbo/windows-64': 2.9.12
-      '@turbo/windows-arm64': 2.9.12
+  turbo@2.9.12: {}
 
   typescript@5.9.3: {}
 

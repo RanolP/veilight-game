@@ -1,5 +1,5 @@
 {
-  "name": "@veilight/game",
+  "name": "@internal/game",
   "version": "0.0.0",
   "private": true,
   "type": "module",
@@ -11,6 +11,6 @@
     "lint": "oxlint ."
   },
   "dependencies": {
-    "@veilight/renderer": "workspace:*"
+    "@internal/renderer": "workspace:*"
   }
 }

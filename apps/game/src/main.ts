@@ -1,4 +1,4 @@
-import { createRenderer, loadAssets, RenderCommandCollector } from "@veilight/renderer";
+import { createRenderer, loadAssets, RenderCommandCollector } from "@internal/renderer";
 import { createGameLoop } from "./game-loop";
 import { atlases, defaultMaterial, demo } from "./rendering-resources";
 
