@@ -1,0 +1,23 @@
+{
+  "name": "veilight-game",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview",
+    "format": "oxfmt --write .",
+    "format:check": "oxfmt --check .",
+    "lint": "oxlint .",
+    "check": "pnpm run format:check && pnpm run lint && pnpm run build",
+    "prepare": "sh -c 'if git rev-parse --git-dir >/dev/null 2>&1; then lefthook install; fi'"
+  },
+  "devDependencies": {
+    "lefthook": "^2.1.6",
+    "oxfmt": "^0.48.0",
+    "oxlint": "^1.63.0",
+    "typescript": "~5.9.3",
+    "vite": "^7.1.12"
+  }
+}
