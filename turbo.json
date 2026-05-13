@@ -16,6 +16,10 @@
       "cache": false
     },
     "format:check": {},
-    "lint": {}
+    "lint": {},
+    "test": {
+      "dependsOn": ["^build"],
+      "outputs": []
+    }
   }
 }

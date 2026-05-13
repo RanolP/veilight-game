@@ -11,6 +11,9 @@
     "lint": "oxlint ."
   },
   "dependencies": {
+    "@internal/foundation": "workspace:*",
+    "@internal/input": "workspace:*",
+    "@internal/input-native-web": "workspace:*",
     "@internal/renderer": "workspace:*"
   }
 }

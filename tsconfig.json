@@ -1,5 +1,24 @@
 {
   "extends": "./tsconfig.base.json",
   "files": [],
-  "references": [{ "path": "./apps/game" }, { "path": "./packages/renderer" }]
+  "references": [
+    {
+      "path": "./apps/veilight-game"
+    },
+    {
+      "path": "./packages/foundation"
+    },
+    {
+      "path": "./packages/input-core"
+    },
+    {
+      "path": "./packages/input-native-web"
+    },
+    {
+      "path": "./packages/input"
+    },
+    {
+      "path": "./packages/renderer"
+    }
+  ]
 }

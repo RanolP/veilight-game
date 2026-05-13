@@ -10,16 +10,19 @@
     "format": "oxfmt --write .",
     "format:check": "oxfmt --check .",
     "lint": "turbo run lint",
-    "check": "pnpm run format:check && turbo run check",
-    "prepare": "sh -c 'if git rev-parse --git-dir >/dev/null 2>&1; then lefthook install; fi'"
+    "check": "pnpm run format:check && turbo run check && pnpm run test",
+    "prepare": "sh -c 'if git rev-parse --git-dir >/dev/null 2>&1; then lefthook install; fi'",
+    "test": "turbo run test"
   },
   "devDependencies": {
     "lefthook": "^2.1.6",
     "oxfmt": "^0.48.0",
     "oxlint": "^1.63.0",
+    "tsdown": "0.21.0",
     "turbo": "^2.6.1",
     "typescript": "~5.9.3",
-    "vite": "^7.1.12"
+    "vite": "^7.1.12",
+    "vitest": "^4.1.6"
   },
   "packageManager": "pnpm@10.29.3"
 }

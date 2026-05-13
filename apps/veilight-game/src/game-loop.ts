@@ -1,6 +1,8 @@
 export type GameLoopHooks = {
+  beforeUpdate?: (timeMilliseconds: number) => void;
   update: (deltaSeconds: number) => void;
   render: (alpha: number) => void;
+  afterRender?: () => void;
 };
 
 export type GameLoopOptions = GameLoopHooks & {
@@ -20,8 +22,10 @@ const DEFAULT_MAX_FRAME_DELTA_SECONDS = 0.25;
 const DEFAULT_MAX_UPDATES_PER_FRAME = 5;
 
 export function createGameLoop({
+  beforeUpdate,
   update,
   render,
+  afterRender,
   fixedDeltaSeconds = DEFAULT_FIXED_DELTA_SECONDS,
   maxFrameDeltaSeconds = DEFAULT_MAX_FRAME_DELTA_SECONDS,
   maxUpdatesPerFrame = DEFAULT_MAX_UPDATES_PER_FRAME,
@@ -35,6 +39,8 @@ export function createGameLoop({
     if (!running) {
       return;
     }
+
+    beforeUpdate?.(timeMilliseconds);
 
     const timeSeconds = timeMilliseconds / 1000;
     const frameDeltaSeconds = Math.min(timeSeconds - lastTimeSeconds, maxFrameDeltaSeconds);
@@ -54,6 +60,7 @@ export function createGameLoop({
     }
 
     render(accumulatorSeconds / fixedDeltaSeconds);
+    afterRender?.();
     animationFrameId = requestAnimationFrame(frame);
   };
 
